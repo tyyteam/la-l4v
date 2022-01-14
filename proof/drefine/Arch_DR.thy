@@ -1067,13 +1067,14 @@ lemma store_pde_set_cap_corres:
       apply (simp add: obj_at_def)+
   done
 
+(* FIXME isa: move to Word_Lib *)
 lemma is_aligned_shiftr_add:
- "\<lbrakk>is_aligned (a::word32) n; is_aligned b m; b < 2 ^n; m \<le> n; n < 32\<rbrakk>
-  \<Longrightarrow> a + b >> m = (a >> m) + (b >> m)"
+ "\<lbrakk>is_aligned a n; is_aligned b m; b < 2^n; m \<le> n; n < LENGTH('a)\<rbrakk>
+  \<Longrightarrow> a + b >> m = (a >> m) + (b >> m)" for a :: "'a::len word"
   apply(simp add:shiftr_div_2n_w word_size)
   apply (rule word_unat.Rep_eqD)
   apply (subst unat_plus_simple[THEN iffD1])
-   apply (subst shiftr_div_2n_w[symmetric],simp add:word_size)+
+   apply (subst shiftr_div_2n_w[symmetric])+
    apply (rule is_aligned_no_wrap')
     apply (rule is_aligned_shiftr[where n = "n - m"])
     apply simp
