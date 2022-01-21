@@ -51,9 +51,9 @@ lemma coerce_memset_to_heap_update_user_data:
   apply (subst access_ti_list_array)
      apply simp
     apply simp
-   apply (simp add: fcp_beta typ_info_word typ_info_ptr word_rsplit_0)
+   apply (simp add: typ_info_word typ_info_ptr word_rsplit_0)
    apply fastforce
-  apply (simp add: collapse_foldl_replicate)
+  apply (simp add: collapse_foldl_replicate word_bits_def)
   done
 
 lemma clift_foldl_hrs_mem_update:
@@ -260,6 +260,13 @@ lemma unat_of_nat_pageBitsForSize_32 [simp]:
   apply simp
   done
 
+
+(* FIXME isa: replace the one in Word_Lib, add a comment to not break it again *)
+lemma word_rsplit_0:
+  "word_rsplit (0::machine_word) = [0, 0, 0, 0, 0, 0, 0, (0::8 word)]"
+  by (simp add: word_rsplit_def bin_rsplit_def word_bits_def word_size_def Cons_replicate_eq)
+  
+
 lemma clearMemory_PageCap_ccorres:
   "ccorres dc xfdc (invs' and valid_cap' (ArchObjectCap (FrameCap ptr undefined sz False None))
            and (\<lambda>s. 2 ^ pageBitsForSize sz \<le> gsMaxObjectSize s)
@@ -398,8 +405,8 @@ lemma coerce_memset_to_heap_update_pte:
                    final_pad_def size_td_lt_ti_typ_pad_combine Let_def size_of_def)
   apply (simp add: typ_info_simps align_td_array' size_td_array)
   apply (simp add: typ_info_array' typ_info_word word_rsplit_0)
-  apply (simp add: numeral_nat word_rsplit_0)
-  apply (simp add: replicateHider_def)
+  apply (simp add: eval_nat_numeral)
+  apply (simp add: replicateHider_def word_rsplit_0 word_bits_def)
   done
 
 lemma objBits_eq_by_type:
@@ -1130,7 +1137,7 @@ lemma coerce_memset_to_heap_update:
                    align_td_array' size_td_array)
   apply (simp add: typ_info_array' access_ti_list_word8_array)
   apply (simp add: typ_info_word word_rsplit_0 upt_conv_Cons)
-  apply (simp add: typ_info_word typ_info_ptr word_rsplit_0
+  apply (simp add: typ_info_word typ_info_ptr word_rsplit_0 word_bits_def
                    replicateHider_def)
   done
 

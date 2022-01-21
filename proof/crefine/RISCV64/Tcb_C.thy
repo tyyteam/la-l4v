@@ -2138,6 +2138,7 @@ shows
                                               Types_H.msgLengthBits_def
                                     simp del: upt.simps
                                        split: option.split_asm)
+  supply take_bit_Suc[where a="numeral w" for w, simp] (* FIXME isa: make global simp *)
                          apply (clarsimp simp: min_def iffD2 [OF mask_eq_iff_w2p] word_size
                                                word_less_nat_alt
                                        split: if_split_asm dest!: word_unat.Rep_inverse')
@@ -2328,6 +2329,9 @@ lemma decodeReadRegisters_ccorres:
               dest!: st_tcb_at_idle_thread')[1]
   apply (clarsimp simp: from_bool_def word_and_1 split: if_split)
   done
+
+ (* FIXME isa: move to Word_Lib *)
+lemmas take_bit_Suc_numeral[simp] = take_bit_Suc[where a="numeral w" for w]
 
 lemma decodeWriteRegisters_ccorres:
   "ccorres (intr_and_se_rel \<currency> dc)  (liftxf errstate id (K ()) ret__unsigned_long_')
