@@ -22,7 +22,7 @@ proof -
     using prems
     by (simp add: maxDom_to_H le_maxDomain_eq_less_numDomains word_le_nat_alt)
   show ?thesis
-    using mod_lemma[OF _ P, where q="unat qdom" and c=numDomains] Q
+    using mod_lemma[OF _ P, where q="unat qdom" and c=numDomains] Q                                                                                                                       
     by (clarsimp simp: num_tcb_queues_calculation cready_queues_index_to_C_def field_simps)
 qed
 
@@ -1382,7 +1382,6 @@ proof -
     by simp
 
   show ?thesis
-  including no_take_bit no_0_dvd
   apply (cinit lift: tcb_')
    apply (rule_tac r'="\<lambda>rv rv'. rv = to_bool rv'" and xf'="ret__unsigned_longlong_'"
             in ccorres_split_nothrow)
