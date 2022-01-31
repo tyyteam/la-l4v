@@ -42,7 +42,7 @@ build-arm: sandbox $(BOOT_FILES)
 	$(CABAL_BUILD) --builddir="dist/arm"
 
 build-arm-hyp: sandbox $(BOOT_FILES) $(CUSTOM_BOOT_FILES)
-	$(CABAL_CONFIGURE) --configure-option="arm-tk1" \
+	$(CABAL_CONFIGURE) --configure-option="arm-exynos5" \
 	    --flags="ArchArmHyp -FFI" \
 	    --builddir="dist/arm-hyp"
 	$(CABAL_BUILD) --builddir="dist/arm-hyp"

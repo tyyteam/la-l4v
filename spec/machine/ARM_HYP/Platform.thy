@@ -43,7 +43,7 @@ definition pptrBase :: word32 where
   "pptrBase \<equiv> 0xe0000000"
 
 definition physBase :: word32 where
-  "physBase \<equiv> 0x80000000"
+  "physBase \<equiv> 0x60000000"
 
 abbreviation (input) "paddrBase \<equiv> physBase"
 
@@ -78,7 +78,7 @@ definition minIRQ :: "irq" where
   "minIRQ \<equiv> 0"
 
 definition maxIRQ :: "irq" where
-  "maxIRQ \<equiv> 191"
+  "maxIRQ \<equiv> 254"
 
 definition irqVGICMaintenance :: "irq" where
   "irqVGICMaintenance \<equiv> 25"
