@@ -48,11 +48,6 @@ end
 
 context kernel_m begin
 
-(* FIXME isa: AutoCorres
-local_setup
-  \<open>AutoCorresModifiesProofs.new_modifies_rules "../c/build/$L4V_ARCH/kernel_all.c_pp"\<close>
-*)
-
 lemma pageBitsForSize_le:
   "pageBitsForSize x \<le> 30"
   by (simp add: pageBitsForSize_def bit_simps split: vmpage_size.splits)

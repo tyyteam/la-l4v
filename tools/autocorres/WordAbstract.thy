@@ -266,12 +266,10 @@ lemma bang_big_nonneg:
   apply arith
   done
 
-(* FIXME isa: move to Word_Lib *)
 lemma int_shiftr_nth[simp]:
   "(i >> n) !! m = i !! (n + m)" for i :: int
   by (simp add: shiftr_def bin_nth_shiftr)
 
-(* FIXME isa: move to Word_Lib *)
 lemma int_shiftl_nth[simp]:
   "(i << n) !! m = (n \<le> m \<and> i !! (m - n))" for i :: int
   by (simp add: shiftl_def bin_nth_shiftl)
