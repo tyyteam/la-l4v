@@ -2577,11 +2577,6 @@ lemma throwError_invocationCatch:
   "throwError a >>= invocationCatch b c d e = throwError (Inl a)"
   by (simp add: invocationCatch_def throwError_bind)
 
-(* FIXME isa: move to Word_Lib *)
-lemma from_bool_odd_eq_and:
-  "from_bool (odd w) = w && 1"
-  by word_eqI (auto simp: from_bool_def split: bool.split)
-
 lemma decodeARMFrameInvocation_ccorres:
   notes if_cong[cong] tl_drop_1[simp]
   defines "does_not_throw args extraCaps pg_sz mapdata \<equiv>
@@ -3097,7 +3092,7 @@ lemma decodeARMFrameInvocation_ccorres:
    apply (clarsimp simp: mask_def[where n=4] typ_heap_simps' isCap_simps)
    apply (frule slotcap_in_mem_valid, clarsimp+)
    apply (erule_tac c="ArchObjectCap (PageDirectoryCap a b)" for a b in ccap_relationE)
-   supply take_bit_Suc[where a="numeral w" for w, simp] from_bool_odd_eq_and[simp]
+   supply from_bool_odd_eq_and[simp]
    apply (case_tac mapdata
           ; (clarsimp simp: cap_lift_page_directory_cap to_bool_def cap_page_directory_cap_lift_def
                             cap_to_H_def[split_simps cap_CL.split] valid_cap'_def,

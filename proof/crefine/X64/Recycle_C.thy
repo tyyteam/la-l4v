@@ -258,13 +258,6 @@ lemma unat_of_nat_pageBitsForSize_32 [simp]:
   apply simp
   done
 
-
-(* FIXME isa: replace the one in Word_Lib, add a comment to not break it again *)
-lemma word_rsplit_0:
-  "word_rsplit (0::machine_word) = [0, 0, 0, 0, 0, 0, 0, (0::8 word)]"
-  by (simp add: word_rsplit_def bin_rsplit_def word_bits_def word_size_def Cons_replicate_eq)
-  
-
 lemma clearMemory_PageCap_ccorres:
   "ccorres dc xfdc (invs' and valid_cap' (ArchObjectCap (PageCap ptr undefined mt sz False None))
            and (\<lambda>s. 2 ^ pageBitsForSize sz \<le> gsMaxObjectSize s)

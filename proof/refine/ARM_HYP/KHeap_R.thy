@@ -737,9 +737,6 @@ lemma map_to_ctes_upd_cte:
 
 declare overflow_plus_one_self[simp]
 
-(* FIXME isa: move to Word_Lib *)
-lemmas take_bit_Suc_numeral[simp] = take_bit_Suc[where a="numeral w" for w]
-
 lemma map_to_ctes_upd_tcb:
   "\<lbrakk> s p = Some (KOTCB tcb'); is_aligned p tcbBlockSizeBits;
     {p + 1..p + mask tcbBlockSizeBits} \<inter> dom s = {} \<rbrakk> \<Longrightarrow>

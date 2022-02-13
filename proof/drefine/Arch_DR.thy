@@ -1067,29 +1067,6 @@ lemma store_pde_set_cap_corres:
       apply (simp add: obj_at_def)+
   done
 
-(* FIXME isa: move to Word_Lib *)
-lemma is_aligned_shiftr_add:
- "\<lbrakk>is_aligned a n; is_aligned b m; b < 2^n; m \<le> n; n < LENGTH('a)\<rbrakk>
-  \<Longrightarrow> a + b >> m = (a >> m) + (b >> m)" for a :: "'a::len word"
-  apply(simp add:shiftr_div_2n_w word_size)
-  apply (rule word_unat.Rep_eqD)
-  apply (subst unat_plus_simple[THEN iffD1])
-   apply (subst shiftr_div_2n_w[symmetric])+
-   apply (rule is_aligned_no_wrap')
-    apply (rule is_aligned_shiftr[where n = "n - m"])
-    apply simp
-   apply (rule shiftr_less_t2n)
-   apply simp
-  apply (simp add:unat_div)
-  apply (subst unat_plus_simple[THEN iffD1])
-   apply (erule is_aligned_no_wrap')
-   apply simp
-  apply (rule div_add)
-   apply (simp add:is_aligned_def[symmetric])
-   apply (erule(1) is_aligned_weaken[rotated])
-  apply (simp add:is_aligned_def)
-  done
-
 lemma pde_opt_cap_eq:
   "\<lbrakk> ko_at (ArchObj (arch_kernel_obj.PageDirectory pd)) (x && ~~ mask pd_bits) s;
          valid_idle s \<rbrakk>
