@@ -624,7 +624,6 @@ lemma lookupPDPTSlot_ccorres:
   apply (clarsimp simp: Collect_const_mem h_t_valid_clift bit_simps)
   apply (frule page_map_l4_at_rf_sr, simp add: rf_sr_def, clarsimp)
   apply (subst array_ptr_valid_array_assertionI, erule h_t_valid_clift, simp+)
-  (* FIXME isa: do this globally, almost never wanted: split del: split_of_bool_asm; also make a of_bool_slpits set *)
   apply (rule conjI; clarsimp simp: cpml4e_relation_def Let_def split del: split_of_bool_asm)
   apply (frule pd_pointer_table_at_rf_sr, simp add: rf_sr_def, clarsimp split del: split_of_bool_asm)
   apply (subst (asm) array_ptr_valid_array_assertionI, erule h_t_valid_clift; simp split del: split_of_bool_asm)
@@ -648,7 +647,7 @@ lemma lookupPDPTSlot_ccorres':
    apply (rule ccorres_abstract_cleanup)
    apply (rule_tac P="(ret__unsigned_longlong = 0) = (rv = X64_H.InvalidPML4E)"
                in ccorres_gen_asm2)
-   apply (wpc; ccorres_rewrite) (* FIXME isa: remove Collect_const *)
+   apply (wpc; ccorres_rewrite)
     apply (rule_tac P=\<top> and P' =UNIV in ccorres_from_vcg_throws)
     apply (rule allI, rule conseqPre, vcg)
     apply (clarsimp simp: throwError_def  return_def syscall_error_rel_def)
