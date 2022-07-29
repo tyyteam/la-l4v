@@ -353,19 +353,19 @@ text \<open>
   Here are some examples.\<close>
 
 lemma short_ccorres_example:
-  "ccorres rel xfn short_abs_guard short_conc_guard hstk short_abs_fn short_conc_fn"
+  "ccorres rrel xf short_abs_guard short_conc_guard hs short_abs_fn short_conc_fn"
   oops
 
 lemma long_ccorres_example:
-  "ccorres rel xfn
-     long_abs_guard long_conc_guard hstk
+  "ccorres rrel xf
+     long_abs_guard long_conc_guard hs
      long_abs_fn long_conc_fn"
   oops
 
 lemma longer_ccorres_example:
-  "ccorres rel xfn
+  "ccorres rrel xf
      long_abs_guard
-     long_conc_guard hstk
+     long_conc_guard hs
      long_abs_fn
      long_conc_fn"
   oops
