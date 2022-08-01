@@ -363,7 +363,9 @@ lemma long_ccorres_example:
   oops
 
 lemma longer_ccorres_example:
-  "ccorres rrel xf
+  "ccorres
+     long_rrel
+     long_xf
      long_abs_guard
      long_conc_guard hs
      long_abs_fn
@@ -372,9 +374,9 @@ lemma longer_ccorres_example:
 
 text \<open>
   The concrete guard will often be simply @{term UNIV}, or an intersection of terms of the form
-  @{term "\<lbrace>\<acute>pointer = cond\<rbrace>"}, which supersedes the set-builder notation. Note that the
-  semantically redundant form @{term "UNIV \<inter> \<lbrace>\<acute>pointer = cond\<rbrace>"} should no longer be necessary,
-  but may still be required in some places.\<close>
+  @{term "\<lbrace>\<acute>pointer = cond\<rbrace>"}, which supersedes the set-builder notation wherever applicable.
+  Note that the semantically redundant form @{term "UNIV \<inter> \<lbrace>\<acute>pointer = cond\<rbrace>"} should no longer
+  be necessary, and should be avoided wherever possible.\<close>
 
 section \<open>Referenecs\<close>
 
