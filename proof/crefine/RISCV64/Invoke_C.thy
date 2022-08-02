@@ -1198,7 +1198,6 @@ lemma decodeCNodeInvocation_ccorres:
                                            apply (ctac(no_vcg) add: invokeCNodeRotate_ccorres)
                                              apply (rule ccorres_alternative2)
                                              apply (rule ccorres_return_CE, simp+)[1]
-
                                             apply (rule ccorres_return_C_errorE, simp+)[1]
                                            apply wp
                                           apply (vcg exspec=invokeCNodeRotate_modifies)
@@ -1460,8 +1459,7 @@ lemma APIType_capBits_high:
   apply (case_tac newType)
   apply (auto simp: invokeUntyped_proofs_def APIType_capBits_def objBits_simps' bit_simps'
                     scBits_simps untypedBits_defs
-                 split: apiobject_type.splits)+
-
+                 split: apiobject_type.splits)
   done
 
 lemma typ_clear_region_eq:
@@ -2363,7 +2361,7 @@ lemma invokeUntyped_Retype_ccorres:
           apply (drule canonical_address_neq_mask[where sz=sz])
            apply (rule sz_bound[folded maxUntypedSizeBits_def])
           apply clarsimp
-          apply_trace (wp updateFreeIndex_forward_invs' sch_act_simple_lift
+          apply (wp updateFreeIndex_forward_invs' sch_act_simple_lift
                     Untyped_R.updateFreeIndex_cte_wp_at hoare_vcg_const_Ball_lift
                     updateFreeIndex_pspace_no_overlap'
                     updateFreeIndex_caps_no_overlap''
@@ -2916,8 +2914,6 @@ lemma decodeUntypedInvocation_ccorres_helper:
                                   fromAPIType_def RISCV64_H.fromAPIType_def)
                 apply (rule syscall_error_throwError_ccorres_n)
                 apply (simp add: syscall_error_to_H_cases)
-
-
                apply (rule_tac xf'="nodeCap_'"
                              and r'="\<lambda>rv rv'. ccap_relation rv rv' \<and> unat (args ! 3) \<le> word_bits"
                           in ccorres_splitE)
