@@ -18,6 +18,7 @@ The C parser supports multiple target architectures:
     - AARCH64
     - X64
     - RISCV64
+    - Loongarch64
 
 These platforms differ in integer sizes and various other details.
 Choose your desired architecture using the L4V_ARCH environment variable:

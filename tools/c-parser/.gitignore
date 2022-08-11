@@ -17,6 +17,7 @@ globalmakevars.local
 /standalone-parser/AARCH64/
 /standalone-parser/RISCV64/
 /standalone-parser/X64/
+/standalone-parser/Loongarch64
 
 /tools/mllex/mllex
 /tools/mlyacc/mlyacc
