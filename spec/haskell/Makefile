@@ -86,7 +86,7 @@ build-aarch64: sandbox $(BOOT_FILES)
 .stack-work:
 	mkdir -p ~/.stack
 	stack --install-ghc build cabal-install
-	sudo $(CABAL_UPDATE)
+	# $(CABAL_UPDATE)
 
 $(CUSTOM_BOOT_FILES):
 	echo "never run mkhsboot for hand-crafted lhs-boot files"
